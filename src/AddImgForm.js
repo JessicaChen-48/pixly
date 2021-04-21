@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function AddImgForm({ set }) {
+function AddImgForm({ set, postAPic }) {
   const [formData, setFormData] = useState({ image: "" });
   function handleChange(e) {
     e.preventDefault();
@@ -10,8 +10,12 @@ function AddImgForm({ set }) {
       [name]: value,
     }));
   }
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
+    const {image} = formData
+    console.log("formData", formData)
+    console.log("formData image", image)
+    await postAPic(image)
     set(formData);
   }
   return (
