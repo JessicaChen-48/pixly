@@ -1,7 +1,7 @@
 window.onload=getExif;
 
 function getExif(imgState = {}) {
-    var img1 = document.getElementById("img1");
+    var img1 = document.getElementById("image");
     EXIF.getData(img1, function() {
         var make = EXIF.getTag(this, "Make");
         var model = EXIF.getTag(this, "Model");
@@ -9,7 +9,7 @@ function getExif(imgState = {}) {
         makeAndModel.innerHTML = `${make} ${model}`;
     });
 
-    var img2 = document.getElementById("img2");
+    var img2 = document.getElementById("image");
     EXIF.getData(img2, function() {
         var allMetaData = EXIF.getAllTags(this);
         var allMetaDataSpan = document.getElementById("allMetaDataSpan");

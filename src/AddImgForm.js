@@ -21,6 +21,7 @@ function AddImgForm({ set }) {
         value={formData.image}
         type="file"
         onChange={handleChange}
+        id="image"
       ></input>
       <button type="submit">Submit!</button>
     </form>
