@@ -4,15 +4,11 @@ const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
 
 class Api {
  
-  static async request(endpoint, data = {}, method = "get") {
+  static async request(endpoint, data = {}, method = "get", headers = {}) {
     console.debug("API Call:", endpoint, data, method);
 
     const url = `${BASE_URL}/${endpoint}`;
     const params = method === "get" ? data : {};
-    const headers = {
-    "Content-Type": "multipart/form-data",
-    "Accept": "application/json",
-    "type": "formData"}
 
     try {
       return (await axios({ url, method, data, params, headers})).data;
@@ -24,11 +20,13 @@ class Api {
   }
 
   static async getAllPics() {
-
+    // Todo: Get all Pics
   }
 
-  static async postAPic(filePath) { 
-    let res = await this.request("upload/", filePath, "post")
+  static async postAPic(imgData) { 
+    const formData = new FormData();
+    formData.append('file',imgData);
+    let res = await this.request("upload", formData, "post", {"Content-Type" : "multipart/form-data"})
     return res;
   }
 

@@ -1,33 +1,25 @@
 import { useState } from "react";
+import Api from "./Api";
 
-function AddImgForm({ set, postAPic }) {
-  const [formData, setFormData] = useState({ image: "" });
+function AddImgForm() {
+  const [ImgData, setImgData] = useState({ image: "" });
+
   function handleChange(e) {
     e.preventDefault();
-    const { name, value } = e.target;
-    setFormData((formData) => ({
-      ...formData,
-      [name]: value,
-    }));
+    setImgData(e.target.files[0]);
   }
 
   async function handleSubmit(e) {
     e.preventDefault();
-    const {image} = formData
-    console.log("formData", formData)
-    console.log("formData image", image)
-    await postAPic(formData)
-    set(formData);
+    await Api.postAPic(ImgData);
   }
-  
+
   return (
-    <form onSubmit={handleSubmit} method="post" encType="multipart/form-data" action="/upload">
+    <form onSubmit={handleSubmit}>
       <input
         name="image"
-        value={formData.image}
         type="file"
         onChange={handleChange}
-        id="image"
       ></input>
       <button type="submit">Submit!</button>
     </form>
