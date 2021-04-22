@@ -10,13 +10,13 @@ class Api {
     const url = `${BASE_URL}/${endpoint}`;
     const params = method === "get" ? data : {};
 
-    // try {
-    //   return (await axios({ url, method, data, params})).data;
-    // } catch (err) {
-    //   console.error("API Error:", err.response);
-    //   let message = err.response.data.error.message;
-    //   throw Array.isArray(message) ? message : [message];
-    // }
+    try {
+      return (await axios({ url, method, data, params})).data;
+    } catch (err) {
+      console.error("API Error:", err.response);
+      let message = err.response.data.error.message;
+      throw Array.isArray(message) ? message : [message];
+    }
   }
 
   static async getAllPics() {
@@ -24,8 +24,10 @@ class Api {
   }
 
   static async postAPic(filePath) {
-    let res = await this.request("/", filePath, "post")
+    let res = await this.request("pics/", filePath, "post")
+    return res;
   }
+
 }
 
 export default Api;
