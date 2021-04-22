@@ -10,16 +10,18 @@ function AddImgForm({ set, postAPic }) {
       [name]: value,
     }));
   }
+
   async function handleSubmit(e) {
     e.preventDefault();
     const {image} = formData
     console.log("formData", formData)
     console.log("formData image", image)
-    await postAPic(image)
+    await postAPic(formData)
     set(formData);
   }
+  
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} method="post" encType="multipart/form-data" action="/upload">
       <input
         name="image"
         value={formData.image}

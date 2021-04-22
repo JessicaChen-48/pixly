@@ -9,9 +9,13 @@ class Api {
 
     const url = `${BASE_URL}/${endpoint}`;
     const params = method === "get" ? data : {};
+    const headers = {
+    "Content-Type": "multipart/form-data",
+    "Accept": "application/json",
+    "type": "formData"}
 
     try {
-      return (await axios({ url, method, data, params})).data;
+      return (await axios({ url, method, data, params, headers})).data;
     } catch (err) {
       console.error("API Error:", err.response);
       let message = err.response.data.error.message;
@@ -23,8 +27,8 @@ class Api {
 
   }
 
-  static async postAPic(filePath) {
-    let res = await this.request("pics/", filePath, "post")
+  static async postAPic(filePath) { 
+    let res = await this.request("upload/", filePath, "post")
     return res;
   }
 
