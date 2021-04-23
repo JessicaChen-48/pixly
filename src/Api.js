@@ -20,7 +20,8 @@ class Api {
   }
 
   static async getAllPics() {
-    // Todo: Get all Pics
+    let res = await this.request("");
+    return res;
   }
 
   static async postAPic(imgData) { 
